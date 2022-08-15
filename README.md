@@ -22,9 +22,13 @@ Later
 
 run these commands:
 
-docker build -f .\src\ChatClub.Web\Dockerfile -t chatclubweb:0.1 .
-docker build -f .\src\ChatClub.Web\Dockerfile -t chatclubweb:0.1 .
+```docker build -f .\src\ChatClub.Web\Dockerfile -t chatclubweb:0.1 .```
 
-run the command docker-compose up -d
+
+```docker build -f .\src\ChatClub.Web\Dockerfile -t chatclubweb:0.1 .```
+
+run the command 
+
+```docker-compose up -d```
 
 The open door of the project: 8001
