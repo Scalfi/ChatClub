@@ -10,10 +10,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/ChatClub.Web/ChatClub.Web.csproj", "src/ChatClub.Web/"]
-COPY ["src/ChatClub.Application/ChatClub.Application.csproj", "src/ChatClub.Application/"]
-COPY ["src/ChatClub.Domain/ChatClub.Domain.csproj", "src/ChatClub.Domain/"]
-COPY ["src/ChatClub.Infrastructure/ChatClub.Infrastructure.csproj", "src/ChatClub.Infrastructure/"]
+COPY ["./src/ChatClub.Web/ChatClub.Web.csproj", "src/ChatClub.Web/"]
+COPY ["./src/ChatClub.Application/ChatClub.Application.csproj", "src/ChatClub.Application/"]
+COPY ["./src/ChatClub.Domain/ChatClub.Domain.csproj", "src/ChatClub.Domain/"]
+COPY ["./src/ChatClub.Infrastructure/ChatClub.Infrastructure.csproj", "src/ChatClub.Infrastructure/"]
 RUN dotnet restore "src/ChatClub.Web/ChatClub.Web.csproj"
 COPY . .
 WORKDIR "/src/src/ChatClub.Web"

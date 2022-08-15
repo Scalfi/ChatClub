@@ -16,7 +16,7 @@ namespace ChatClub.Application.Services
             var texts = param.Split('=');
             var text = texts[1];
             var client = new HttpClient();
-            var url = "chatclubbot:5122/api/bot?param="+text;
+            var url = "http://chatclubbot:80/api/bot?param=" + text;
             await client.GetAsync(url);
         }
     }
