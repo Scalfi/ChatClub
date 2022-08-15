@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form id="idForm">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="email" id="registerEmail" class="form-control" />
+        <label class="form-label" for="registerEmail">Email</label>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+        <input type="password" id="registerPassword" class="form-control" />
+        <label class="form-label" for="registerPassword">Password</label>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+    <p>I'm member? <a href="/">Login</a></p>
+
+</form>
+@section scripts {
+    <script>
+    $(document).ready(function () {
+
+        $("#idForm").submit(function (e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            $.ajax({
+                type: "POST",
+                url: "/register/register",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8;',
+                    'Accept':'*/*'
+                },
+                dataType: "json",
+                data: JSON.stringify({
+                        "email": $("#registerEmail").val(),
+                        "password": $("#registerPassword").val(),
+                }),
+                // serializes the form's elements.
+                success: function (data) {
+                    alert(data); // show response from the php script.
+                }
+            });
+
+        });
+    });
+    </script>
+    }

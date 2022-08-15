@@ -1,0 +1,52 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+networks:
+  dockerapi-dev:
+    driver: bridge 
+
+services:
+  chatclubweb:
+    image: chatclubweb
+    build:
+      context: .
+      dockerfile: src/ChatClub.Web/Dockerfile
+    ports:
+      - 5029:5029
+    networks:
+      - dockerapi-dev 
+
+  chatclubbot:
+    image: chatclubbot
+    build:
+      context: .
+      dockerfile: src/ChatClub.Bot/Dockerfile
+    ports:
+      - 5122:5122
+    networks:
+      - dockerapi-dev
+  
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+    networks:
+      - dockerapi-dev
+
+  rabbitmq: 
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+    labels:
+      NAME: "rabbitmq"
+    ports:
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      - dockerapi-dev

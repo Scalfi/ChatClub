@@ -1,0 +1,65 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div class="col-md-8">
+        <form id="idForm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" value="" placeholder="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit"  class="btn btn-primary">Submit</button>
+            <p>Register as a new user <a href="/register">Register</a></p>
+
+        </form>
+    </div>
+</div>
+@section scripts {
+    <script>
+    $(document).ready(function () {
+
+        $("#idForm").submit(function (e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+                console.log($("#exampleInputEmail1").val(), $("#exampleInputPassword1").val())
+            $.ajax({
+                type: "POST",
+                url: "/auth/login",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8;',
+                    'Accept':'*/*'
+                },
+                dataType: "json",
+                data: JSON.stringify({
+                    "email" : $("#exampleInputEmail1").val(),
+                    "password": $("#exampleInputPassword1").val(),
+                }),
+                success: function (data) { 
+                    window.location.href = '/chat'
+                },
+                error: function (xhr, status, error) {
+                     alert('You have entered an invalid email or password ')
+                }
+                    
+                
+            });
+
+        });
+    });
+    </script>
+}
